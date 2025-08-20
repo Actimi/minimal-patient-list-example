@@ -9,6 +9,7 @@ import {
 } from "@actimi/ovok-native";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
@@ -21,7 +22,7 @@ polyfillMedplumWebAPIs();
 const storage = new ExpoClientStorage();
 
 // Initialize Ovok client with your configuration
-const ovokClient = new OvokClient({
+export const ovokClient = new OvokClient({
   storage,
   cacheTime: 0,
   baseUrl: "https://api.ovok.com",
@@ -29,29 +30,33 @@ const ovokClient = new OvokClient({
   tenantCode: "public-example", // Change to your tenant code
 });
 
+const queryClient = new QueryClient();
+
 export default function RootLayout() {
   return (
     <KeyboardProvider>
       <OvokProvider client={ovokClient}>
-        <OvokThemeProvider
-          theme={{
-            colors: DEFAULT_COLORS,
-            dark: false,
-            spacingMultiplier: DEFAULT_MULTIPLIERS.spacing,
-            borderRadiusMultiplier: DEFAULT_MULTIPLIERS.borderRadius,
-          }}
-        >
-          <BottomSheetModalProvider>
-            <BSMPVOVK>
-              <ThemeProvider value={DefaultTheme}>
-                <Stack screenOptions={{ headerShown: false }}>
-                  <Stack.Screen name="(auth)" />
-                  <Stack.Screen name="(authenticated)" />
-                </Stack>
-              </ThemeProvider>
-            </BSMPVOVK>
-          </BottomSheetModalProvider>
-        </OvokThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <OvokThemeProvider
+            theme={{
+              colors: DEFAULT_COLORS,
+              dark: false,
+              spacingMultiplier: DEFAULT_MULTIPLIERS.spacing,
+              borderRadiusMultiplier: DEFAULT_MULTIPLIERS.borderRadius,
+            }}
+          >
+            <BottomSheetModalProvider>
+              <BSMPVOVK>
+                <ThemeProvider value={DefaultTheme}>
+                  <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="(auth)" />
+                    <Stack.Screen name="(authenticated)" />
+                  </Stack>
+                </ThemeProvider>
+              </BSMPVOVK>
+            </BottomSheetModalProvider>
+          </OvokThemeProvider>
+        </QueryClientProvider>
       </OvokProvider>
     </KeyboardProvider>
   );
