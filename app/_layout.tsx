@@ -1,5 +1,53 @@
+import { OvokClient, OvokProvider } from "@actimi/ovok-core";
+import {
+  BottomSheetModalProvider as BSMPVOVK,
+  DEFAULT_COLORS,
+  DEFAULT_MULTIPLIERS,
+  ExpoClientStorage,
+  ThemeProvider as OvokThemeProvider,
+  polyfillMedplumWebAPIs,
+} from "@actimi/ovok-native";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
+import { KeyboardProvider } from "react-native-keyboard-controller";
+
+// Initialize required polyfills for medical APIs
+polyfillMedplumWebAPIs();
+
+// Configure client storage
+const storage = new ExpoClientStorage();
+
+// Initialize Ovok client with your configuration
+const ovokClient = new OvokClient({
+  storage,
+  cacheTime: 0,
+  baseUrl: "https://api.actimi.com",
+  fhirUrlPath: "/fhir",
+  tenantCode: "",
+});
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <KeyboardProvider>
+      <OvokProvider client={ovokClient}>
+        <OvokThemeProvider
+          theme={{
+            colors: DEFAULT_COLORS,
+            dark: true,
+            spacingMultiplier: DEFAULT_MULTIPLIERS.spacing,
+            borderRadiusMultiplier: DEFAULT_MULTIPLIERS.borderRadius,
+          }}
+        >
+          <BottomSheetModalProvider>
+            <BSMPVOVK>
+              <ThemeProvider value={DarkTheme}>
+                <Stack />
+              </ThemeProvider>
+            </BSMPVOVK>
+          </BottomSheetModalProvider>
+        </OvokThemeProvider>
+      </OvokProvider>
+    </KeyboardProvider>
+  );
 }
