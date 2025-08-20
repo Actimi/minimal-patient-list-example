@@ -1,0 +1,85 @@
+{
+  "sign-in": {
+    "title": "Sign In",
+    "subtitle": "Log in to your account to start using Actimi products.",
+    "email": "Email",
+    "password": "Password",
+    "button": "Sign In",
+    "forgot-password": "Forgot password?",
+    "google": "Google",
+    "apple": "Apple",
+    "form": {
+      "email": {
+        "invalid": "Invalid email address",
+        "required": "Email is required"
+      },
+      "password": {
+        "required": "Password is required",
+        "min": "Password must be at least 6 characters"
+      }
+    },
+    "or-login-with": "Or sign in with",
+    "footer": "If you haven't purchased a telemonitoring package yet, visit <site>actimi.com</site>",
+    "dont-have-account": "Don't have an account? <register />"
+  },
+  "register": {
+    "title": "Register",
+    "subtitle": "Create your account to start using Actimi products.",
+    "password-confirm": "Confirm password",
+    "name": "Name",
+    "surname": "Surname",
+    "button": "Register",
+    "or-register-with": "Or register with",
+    "already-have-account": "Already have an account? <login />",
+    "form": {
+      "confirm-password": {
+        "required": "Confirm password is required",
+        "mismatch": "Passwords do not match"
+      },
+      "password": {
+        "special-character": "Password must contain at least one special character",
+        "min": "Password must be at least 8 characters",
+        "number": "Password must contain at least one number",
+        "lowercase": "Password must contain at least one lowercase letter",
+        "uppercase": "Password must contain at least one uppercase letter",
+        "no-spaces": "Password must not contain spaces",
+        "max": "Password must be at most 64 characters"
+      },
+      "name": {
+        "required": "Name is required",
+        "min": "Name must be at least 2 characters",
+        "max": "Name must be at most 25 characters"
+      },
+      "surname": {
+        "required": "Surname is required",
+        "min": "Surname must be at least 2 characters",
+        "max": "Surname must be at most 25 characters"
+      }
+    }
+  },
+
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "unknown": "Unknown",
+    "not-specified": "Not specified"
+  },
+
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "yes": "Yes",
+    "no": "No",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit"
+  },
+
+  "patient-card": {
+    "age-years": "{age} years old",
+    "birth-date-with-age": "{date} ({age} years old)"
+  }
+}

@@ -12,6 +12,8 @@ import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
+import "../features/localization/i18n";
+
 // Initialize required polyfills for medical APIs
 polyfillMedplumWebAPIs();
 
