@@ -8,7 +8,7 @@ import {
   polyfillMedplumWebAPIs,
 } from "@actimi/ovok-native";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import { DarkTheme, ThemeProvider } from "@react-navigation/native";
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
@@ -24,9 +24,9 @@ const storage = new ExpoClientStorage();
 const ovokClient = new OvokClient({
   storage,
   cacheTime: 0,
-  baseUrl: "https://api.actimi.com",
+  baseUrl: "https://api.ovok.com",
   fhirUrlPath: "/fhir",
-  tenantCode: "",
+  tenantCode: "public-example", // Change to your tenant code
 });
 
 export default function RootLayout() {
@@ -36,15 +36,18 @@ export default function RootLayout() {
         <OvokThemeProvider
           theme={{
             colors: DEFAULT_COLORS,
-            dark: true,
+            dark: false,
             spacingMultiplier: DEFAULT_MULTIPLIERS.spacing,
             borderRadiusMultiplier: DEFAULT_MULTIPLIERS.borderRadius,
           }}
         >
           <BottomSheetModalProvider>
             <BSMPVOVK>
-              <ThemeProvider value={DarkTheme}>
-                <Stack />
+              <ThemeProvider value={DefaultTheme}>
+                <Stack screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="(auth)" />
+                  <Stack.Screen name="(authenticated)" />
+                </Stack>
               </ThemeProvider>
             </BSMPVOVK>
           </BottomSheetModalProvider>
